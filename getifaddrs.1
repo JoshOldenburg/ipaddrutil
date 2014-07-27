@@ -1,0 +1,33 @@
+.\" Process this file with
+.\" groff -man -Tascii getifaddrs.1
+.\"
+.\" http://www.schweikhardt.net/man_page_howto.html
+.\" Gosh, man pages are ugly...
+.TH GETIFADDRS 1 "JULY 2014" "Josh Oldenburg" "Josh's Utilities"
+.SH NAME
+getifaddrs \- get IP addresses, in a parseable format
+.SH SYNOPSIS
+.B getifaddrs [ -a |
+.I interface
+.B ]
+.SH DESCRIPTION
+.B getifaddrs
+outputs the IP addresses for the system. It shows all
+interfaces by default. Internally, it uses
+.BR getifaddrs (3)
+to get the addresses. Passing a nonexistant interface
+does not error but does not output anything.
+.SH OPTIONS
+.IP -a
+Output the addresses of all interfaces (the default)
+.IP interface
+Display only the address(es) of the specified interface.
+.SH BUGS
+-a is useless, as it is the default.
+.SH AUTHOR
+Josh Oldenburg @ http://joshuaoldenburg.com
+
+https://github.com/JoshTheGeek/ipaddrutil
+.SH "SEE ALSO"
+.BR getifaddrs (3),
+.BR ifconfig (1)
