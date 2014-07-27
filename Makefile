@@ -7,4 +7,4 @@ getifaddrs:
 	$(CC) $(CFLAGS) getifaddrs.c -o getifaddrs
 
 clean:
-	rm getifaddrs
+	rm getifaddrs a.out
