@@ -8,9 +8,8 @@
 #include <string.h>
 
 int main(int argc, const char *argv[]) {
-	const char *interface = "en1";
+	const char *interface = "";
 	if (argc > 1) interface = argv[1];
-	if (strcmp(interface, "-a") == 0) interface = "";
 
 	struct ifaddrs *ifaddr;
 

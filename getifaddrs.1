@@ -7,7 +7,7 @@
 .SH NAME
 getifaddrs \- get IP addresses, in a parseable format
 .SH SYNOPSIS
-.B getifaddrs [ -a |
+.B getifaddrs [
 .I interface
 .B ]
 .SH DESCRIPTION
@@ -18,12 +18,11 @@ interfaces by default. Internally, it uses
 to get the addresses. Passing a nonexistant interface
 does not error but does not output anything.
 .SH OPTIONS
-.IP -a
-Output the addresses of all interfaces (the default)
 .IP interface
 Display only the address(es) of the specified interface.
 .SH BUGS
--a is useless, as it is the default.
+None? Is that even possible? Surely someone will find something.
+Please report bugs at https://github.com/JoshTheGeek/ipaddrutil
 .SH AUTHOR
 Josh Oldenburg @ http://joshuaoldenburg.com
 
