@@ -1,10 +1,13 @@
 CC=gcc # I'd use clang, but gcc links to clang on OS X anyways
 CFLAGS=-Wall # -Weverything is clang-specific
 
-all: getifaddrs
+all: getifaddrs getipfortmux
 
 getifaddrs:
 	$(CC) $(CFLAGS) getifaddrs.c -o getifaddrs
 
+getipfortmux:
+	$(CC) $(CFLAGS) getipfortmux.c -o getipfortmux
+
 clean:
-	rm getifaddrs a.out
+	rm getifaddrs a.out getipfortmux
