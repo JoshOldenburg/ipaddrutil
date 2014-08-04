@@ -6,15 +6,30 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdbool.h>
+
+// argv (const char **) != *const* (or something like that)
+#pragma clang diagnostic ignored "-Wincompatible-pointer-types-discards-qualifiers"
 
 int main(int argc, const char *argv[]) {
 	const char *interface = "";
-	if (argc > 1) interface = argv[1];
+	int quiet = false;
+
+	int opt;
+	while ((opt = getopt(argc, argv, "q")) != -1) {
+		switch (opt) {
+			case 'q': quiet = true; break;
+			default:
+			  if (!quiet) fprintf(stderr, "Usage: %s [-i] [interface]\n", argv[0]);
+			  exit(EXIT_FAILURE);
+		}
+	}
+	if (optind < argc) interface = argv[optind];
 
 	struct ifaddrs *ifaddr;
 
 	if (getifaddrs(&ifaddr) == -1) {
-		perror("getifaddrs");
+		if (!quiet) perror("getifaddrs");
 		freeifaddrs(ifaddr);
 		return EXIT_FAILURE;
 	}
@@ -28,12 +43,13 @@ int main(int argc, const char *argv[]) {
 		char host[NI_MAXHOST];
 		int s = 0;
 		if ((s = getnameinfo(ifa->ifa_addr, sizeof(struct sockaddr_in), host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST)) != 0) {
-			printf("getnameinfo() failed: %s\n", gai_strerror(s));
+			if (!quiet) printf("getnameinfo() failed: %s\n", gai_strerror(s));
 			freeifaddrs(ifaddr);
 			return EXIT_FAILURE;
 		}
 
-		printf("%s:%s\n", ifa->ifa_name, host);
+		if (quiet) printf("%s\n", host);
+		else printf("%s:%s\n", ifa->ifa_name, host);
 	}
 
 	freeifaddrs(ifaddr);
