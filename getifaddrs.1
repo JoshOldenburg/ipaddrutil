@@ -7,7 +7,7 @@
 .SH NAME
 getifaddrs \- get IP addresses, in a parseable format
 .SH SYNOPSIS
-.B getifaddrs [
+.B getifaddrs [-q] [
 .I interface
 .B ]
 .SH DESCRIPTION
@@ -18,6 +18,8 @@ interfaces by default. Internally, it uses
 to get the addresses. Passing a nonexistant interface
 does not error but does not output anything.
 .SH OPTIONS
+.IP -q
+Output only the addresses
 .IP interface
 Display only the address(es) of the specified interface.
 .SH BUGS
