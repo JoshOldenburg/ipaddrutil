@@ -10,4 +10,4 @@ getipfortmux:
 	$(CC) $(CFLAGS) getipfortmux.c -o getipfortmux
 
 clean:
-	rm -f getifaddrs a.out getipfortmux
+	rm -rf getifaddrs a.out getipfortmux ./*.dSYM

@@ -26,11 +26,16 @@ int main(int argc, const char *argv[]) {
 		return EXIT_FAILURE;
 	}
 
+	int hasPrintedAddress = 0;
+	int interfaceHasAddress = 0;
 
 	for (struct ifaddrs *ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) {
 		if (!ifa->ifa_addr) continue; // Filter out things without an address
 
-		if (!streql(ifa->ifa_name, interface) || ifa->ifa_addr->sa_family != AF_INET) continue; // Only the right interface
+		if (!streql(ifa->ifa_name, interface)) continue; // Skip if not correct interface
+		if (ifa->ifa_addr->sa_family != AF_INET) continue; // Skip if no address
+
+		interfaceHasAddress = 1;
 
 		char host[NI_MAXHOST]; // Will be the IP
 		int s = 0;
@@ -56,7 +61,11 @@ int main(int argc, const char *argv[]) {
 		}
 
 		printf("%s", host);
+		hasPrintedAddress = 1;
 	}
+
+	if (!hasPrintedAddress && interfaceHasAddress) printf("%sND", homeStatic);
+	else if (!interfaceHasAddress) printf("no network");
 
 	freeifaddrs(ifaddr);
 	return EXIT_SUCCESS;
