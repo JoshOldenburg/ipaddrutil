@@ -10,7 +10,7 @@
 static const char *homeStatic = "192.168.1.151";
 static const char *homePrefix = "192.168.1.";
 static const char *homeNetmask = "255.255.255.0";
-static const char *defaultInterface = "en1";
+static const char *defaultInterface = "en0";
 
 int streql(const char *, const char *);
 
