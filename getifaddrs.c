@@ -20,7 +20,7 @@ int main(int argc, const char *argv[]) {
 		switch (opt) {
 			case 'q': quiet = true; break;
 			default:
-			  if (!quiet) fprintf(stderr, "Usage: %s [-i] [interface]\n", argv[0]);
+			  if (!quiet) fprintf(stderr, "Usage: %s [-q] [interface]\n", argv[0]);
 			  exit(EXIT_FAILURE);
 		}
 	}
